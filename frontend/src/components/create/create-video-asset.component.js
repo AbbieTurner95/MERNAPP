@@ -27,6 +27,7 @@ export default class CreateVideoAsset extends Component {
       asset_date: "",
       asset_keywords: "",
       type: "",
+      asset_version: 1,
       isCheckedout: "false"
     };
   }
@@ -84,7 +85,7 @@ export default class CreateVideoAsset extends Component {
       console.log(`Asset Descp: ${this.state.asset_descp}`);
       console.log(`Asset Size: ${this.state.asset_size}`);
       console.log(`Asset Length: ${this.state.asset_length}`);
-      console.log(`Asset Size: ${this.state.asset_size}`);
+      console.log(`Asset Version: ${this.state.asset_version}`);
 
       const newAsset = {
         asset_title: this.state.asset_title,
@@ -94,6 +95,7 @@ export default class CreateVideoAsset extends Component {
         asset_descp: this.state.asset_descp,
         asset_size: this.state.asset_size,
         asset_length: this.state.asset_length,
+        asset_version: this.state.asset_version,
         isCheckedout: this.state.isCheckedout
       };
 
@@ -109,6 +111,7 @@ export default class CreateVideoAsset extends Component {
         asset_descp: "",
         asset_size: "",
         asset_length: "",
+        asset_version: 1,
         isCheckedout: "false"
       });
     } else {

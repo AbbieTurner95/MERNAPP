@@ -23,7 +23,8 @@ export default class CreatePictureAsset extends Component {
       asset_descp: "",
       asset_date: "",
       asset_keywords: "",
-      isCheckout: "false",
+      isCheckout: false,
+      asset_version: 1,
       type: ""
     };
   }
@@ -73,6 +74,7 @@ export default class CreatePictureAsset extends Component {
       console.log(`Asset Keywords: ${this.state.asset_keywords}`);
       console.log(`Asset Descp: ${this.state.asset_descp}`);
       console.log(`Asset Size: ${this.state.asset_size}`);
+      console.log(`Asset Version: ${this.state.asset_version}`);
 
       const newAsset = {
         asset_title: this.state.asset_title,
@@ -81,7 +83,8 @@ export default class CreatePictureAsset extends Component {
         asset_keywords: this.state.asset_keywords,
         asset_descp: this.state.asset_descp,
         asset_size: this.state.asset_size,
-        isCheckout: this.state.isCheckout
+        isCheckout: this.state.isCheckout,
+        asset_version: this.state.asset_version
       };
 
       axios
@@ -95,7 +98,8 @@ export default class CreatePictureAsset extends Component {
         asset_keywords: "",
         asset_descp: "",
         asset_size: "",
-        isCheckout: "false"
+        asset_version: 1,
+        isCheckout: false
       });
     } else {
       this.validator.showMessages();

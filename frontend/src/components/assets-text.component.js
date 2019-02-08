@@ -8,7 +8,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 
 const Asset = props => (
   <tr>

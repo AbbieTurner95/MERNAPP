@@ -25,6 +25,9 @@ let Text = new Schema({
   isCheckedoutBy: {
     type: ObjectId,
     default: null
+  },
+  asset_version: {
+    type: Number
   }
 });
 

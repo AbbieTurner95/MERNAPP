@@ -22,6 +22,7 @@ export default class CreateTextAsset extends Component {
       asset_date: "",
       asset_keywords: "",
       type: "",
+      asset_version: 1,
       isCheckedout: "false"
     };
   }
@@ -66,6 +67,7 @@ export default class CreateTextAsset extends Component {
       console.log(`Asset Date: ${this.state.asset_date}`);
       console.log(`Asset Keywords: ${this.state.asset_keywords}`);
       console.log(`Asset Descp: ${this.state.asset_descp}`);
+      console.log(`Asset Version: ${this.state.asset_version}`);
 
       const newAsset = {
         asset_title: this.state.asset_title,
@@ -73,7 +75,8 @@ export default class CreateTextAsset extends Component {
         asset_date: this.state.asset_date,
         asset_keywords: this.state.asset_keywords,
         asset_descp: this.state.asset_descp,
-        isCheckedout: this.state.isCheckedout
+        isCheckedout: this.state.isCheckedout,
+        asset_version: this.state.asset_version
       };
 
       axios
@@ -86,6 +89,7 @@ export default class CreateTextAsset extends Component {
         asset_date: "",
         asset_descp: "",
         asset_keywords: "",
+        asset_version: 1,
         isCheckedout: "false"
       });
     } else {

@@ -31,6 +31,9 @@ let Video = new Schema({
   isCheckedoutBy: {
     type: ObjectId,
     default: null
+  },
+  asset_version: {
+    type: Number
   }
 });
 
