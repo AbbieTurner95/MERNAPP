@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../../components/assets.css";
-import delete_pic from "../../images/delete.png";
+import delete_pic from "../../Images/delete.png";
 
 export default class deletePictureAsset extends Component {
   delete() {

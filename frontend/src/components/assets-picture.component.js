@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Asset = props => (
@@ -17,6 +18,12 @@ const Asset = props => (
     <td>{props.asset.asset_size}</td>
     <td>{props.asset.asset_date}</td>
     <td>{props.asset.asset_keywords}</td>
+
+    <td>
+      <Link to={"picture/versions/" + props.asset._id}>
+        <FontAwesomeIcon icon={faDesktop} {...props} />
+      </Link>
+    </td>
 
     <td>
       <Link to={"picture/edit/" + props.asset._id}>
@@ -129,7 +136,6 @@ export default class assetPicture extends Component {
         <Asset asset={currentAsset} user={this.props.currentUser} key={i} />
       );
     });
-    console.log(html);
     return html;
   };
 
@@ -174,6 +180,7 @@ export default class assetPicture extends Component {
               <th scope="col">Size</th>
               <th scope="col">Date</th>
               <th scope="col">Keywords</th>
+              <th scope="col">Versions</th>
 
               {this.state.assets.isCheckedout ? (
                 <></>

@@ -8,6 +8,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 const Asset = props => (
   <tr>
@@ -16,6 +17,12 @@ const Asset = props => (
     <td>{props.asset.asset_descp}</td>
     <td>{props.asset.asset_date}</td>
     <td>{props.asset.asset_keywords}</td>
+
+    <td>
+      <Link to={"text/versions/" + props.asset._id}>
+        <FontAwesomeIcon icon={faDesktop} {...props} />
+      </Link>
+    </td>
 
     <td>
       <Link to={"text/edit/" + props.asset._id}>
@@ -170,6 +177,7 @@ export default class assetText extends Component {
               <th scope="col">Description</th>
               <th scope="col">Date</th>
               <th scope="col">Keywords</th>
+              <th scope="col">Versions</th>
 
               {this.state.assets.isCheckedout ? (
                 <></>

@@ -8,6 +8,10 @@ import Login from "./LogIn/login.js";
 import AssetsList from "./components/asstes-list.components.js";
 import CreateAsset from "./components/create/create-asset.component";
 
+import PictureVersion from "./components/asset-picture-versions.component";
+import VideoVersion from "./components/asset-video-versions.component";
+import TextVersion from "./components/asset-text-versions.component";
+
 import PictureEdit from "./components/edit/edit-picture-component";
 import TextEdit from "./components/edit/edit-text-component";
 import VideoEdit from "./components/edit/edit-video-component";
@@ -15,11 +19,14 @@ import VideoEdit from "./components/edit/edit-video-component";
 import DeletePicture from "./components/delete/delete-picture-asset.component";
 import DeleteText from "./components/delete/delete-text-asset.component";
 import DeleteVideo from "./components/delete/delete-video-asset.component";
+
 import RestrictedRoute from "./RouteTypes/RestrictedRoute";
 import UnrestrictedRoute from "./RouteTypes/UnrestrictedRoute";
-import { getFromStorage } from "./LogIn/utils/storage.js";
-import Axios from "axios";
 import AdminRestrictedRoute from "./RouteTypes/AdminRestrictedRoute";
+
+import { getFromStorage } from "./LogIn/utils/storage.js";
+
+import Axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +58,7 @@ class App extends Component {
   handleLogout = e => {
     let obj = getFromStorage("tms_app");
     if (obj && obj.token) {
-      Axios.get("http://localhost:4000/auth/logout", {
+      Axios.post("http://localhost:4000/auth/logout", {
         token: obj.token
       });
     }
@@ -142,9 +149,28 @@ class App extends Component {
             component={TextEdit}
             props={cProps}
           />
+
           <RestrictedRoute
             path="/video/edit/:id"
             component={VideoEdit}
+            props={cProps}
+          />
+
+          <RestrictedRoute
+            path="/picture/versions/:id"
+            component={PictureVersion}
+            props={cProps}
+          />
+
+          <RestrictedRoute
+            path="/text/versions/:id"
+            component={TextVersion}
+            props={cProps}
+          />
+
+          <RestrictedRoute
+            path="/video/versions/:id"
+            component={VideoVersion}
             props={cProps}
           />
 
