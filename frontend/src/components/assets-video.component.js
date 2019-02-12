@@ -26,11 +26,15 @@ const Asset = props => (
       </Link>
     </td>
 
-    <td>
-      <Link to={"video/edit/" + props.asset._id}>
-        <FontAwesomeIcon icon={faEdit} />
-      </Link>
-    </td>
+    {props.user && props.user.isAdmin ? (
+      <td>
+        <Link to={"video/edit/" + props.asset._id}>
+          <FontAwesomeIcon icon={faEdit} />
+        </Link>
+      </td>
+    ) : (
+      <></>
+    )}
 
     {props.user && props.user.isAdmin ? (
       <td>
@@ -185,10 +189,10 @@ export default class assetVideo extends Component {
               <th scope="col">Keywords</th>
               <th scope="col">Versions</th>
 
-              {this.state.assets.isCheckedout ? (
-                <></>
-              ) : (
+              {this.props.currentUser && this.props.currentUser.isAdmin ? (
                 <th scope="col">Edit</th>
+              ) : (
+                <></>
               )}
 
               {this.props.currentUser && this.props.currentUser.isAdmin ? (

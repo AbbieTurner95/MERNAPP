@@ -139,18 +139,20 @@ class App extends Component {
             component={AssetsList}
             props={cProps}
           />
-          <RestrictedRoute
+
+          <AdminRestrictedRoute
             path="/picture/edit/:id"
             component={PictureEdit}
             props={cProps}
           />
-          <RestrictedRoute
+
+          <AdminRestrictedRoute
             path="/text/edit/:id"
             component={TextEdit}
             props={cProps}
           />
 
-          <RestrictedRoute
+          <AdminRestrictedRoute
             path="/video/edit/:id"
             component={VideoEdit}
             props={cProps}
@@ -199,6 +201,5 @@ class App extends Component {
     );
   }
 }
-//}
 
 export default App;
