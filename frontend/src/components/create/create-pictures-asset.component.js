@@ -17,15 +17,19 @@ export default class CreatePictureAsset extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      asset_title: "",
-      asset_author: "",
-      asset_size: "",
-      asset_descp: "",
-      asset_date: "",
-      asset_keywords: "",
-      isCheckout: false,
-      asset_version: 1,
-      type: ""
+      isCheckedout: "false",
+
+      newest_version: {
+        asset_title: "",
+        asset_author: "",
+        asset_date: "",
+        asset_keywords: "",
+        asset_descp: "",
+        asset_size: "",
+        asset_version: "",
+        edited_at: "",
+        edited_by: ""
+      }
     };
   }
 
@@ -67,40 +71,58 @@ export default class CreatePictureAsset extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
-      console.log(`Form submitted:`);
-      console.log(`Asset Title: ${this.state.asset_title}`);
-      console.log(`Asset Author: ${this.state.asset_author}`);
-      console.log(`Asset Date: ${this.state.asset_date}`);
-      console.log(`Asset Keywords: ${this.state.asset_keywords}`);
-      console.log(`Asset Descp: ${this.state.asset_descp}`);
-      console.log(`Asset Size: ${this.state.asset_size}`);
-      console.log(`Asset Version: ${this.state.asset_version}`);
-
       const newAsset = {
-        asset_title: this.state.asset_title,
-        asset_author: this.state.asset_author,
-        asset_date: this.state.asset_date,
-        asset_keywords: this.state.asset_keywords,
-        asset_descp: this.state.asset_descp,
-        asset_size: this.state.asset_size,
-        isCheckout: this.state.isCheckout,
-        asset_version: this.state.asset_version
+        file: {
+          isCheckedout: this.state.isCheckedout,
+
+          newest_version: {
+            asset_title: this.state.asset_title,
+            asset_author: this.state.asset_author,
+            asset_date: this.state.asset_date,
+            asset_keywords: this.state.asset_keywords,
+            asset_descp: this.state.asset_descp,
+            asset_size: this.state.asset_size,
+            asset_version: this.state.asset_version,
+            edited_at: this.state.edited_at,
+            edited_by: this.state.edited_by
+          },
+
+          all_versions: [
+            {
+              asset_title: this.state.asset_title,
+              asset_author: this.state.asset_author,
+              asset_date: this.state.asset_date,
+              asset_keywords: this.state.asset_keywords,
+              asset_descp: this.state.asset_descp,
+              asset_size: this.state.asset_size,
+              asset_version: this.state.asset_version,
+              edited_at: this.state.edited_at,
+              edited_by: this.state.edited_by
+            }
+          ]
+        }
       };
 
       axios
-        .post("http://localhost:4000/assets/addPicture", newAsset)
-        .then(alert("Picture file Added Successfully!"));
+        .post("http://localhost:4000/assets/addPicture", newAsset.file)
+        .then(res => {
+          alert("Picture file Added Successfully!");
+          this.state = {
+            isCheckedout: "false",
 
-      this.setState({
-        asset_title: "",
-        asset_author: "",
-        asset_date: "",
-        asset_keywords: "",
-        asset_descp: "",
-        asset_size: "",
-        asset_version: 1,
-        isCheckout: false
-      });
+            newest_version: {
+              asset_title: "",
+              asset_author: "",
+              asset_date: "",
+              asset_keywords: "",
+              asset_descp: "",
+              asset_size: "",
+              asset_version: "",
+              edited_at: "",
+              edited_by: ""
+            }
+          };
+        });
     } else {
       this.validator.showMessages();
       this.forceUpdate();

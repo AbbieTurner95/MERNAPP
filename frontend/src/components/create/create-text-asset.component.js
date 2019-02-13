@@ -16,14 +16,31 @@ export default class CreateTextAsset extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      asset_title: "",
-      asset_author: "",
-      asset_descp: "",
-      asset_date: "",
-      asset_keywords: "",
-      type: "",
-      asset_version: 1,
-      isCheckedout: "false"
+      isCheckedout: "false",
+
+      newest_version: {
+        asset_title: "",
+        asset_author: "",
+        asset_date: "",
+        asset_keywords: "",
+        asset_descp: "",
+        asset_version: "",
+        edited_at: "",
+        edited_by: ""
+      },
+
+      all_versions: [
+        {
+          asset_title: "",
+          asset_author: "",
+          asset_date: "",
+          asset_keywords: "",
+          asset_descp: "",
+          asset_version: "",
+          edited_at: "",
+          edited_by: ""
+        }
+      ]
     };
   }
 
@@ -61,37 +78,55 @@ export default class CreateTextAsset extends Component {
     e.preventDefault();
 
     if (this.validator.allValid()) {
-      console.log(`Form submitted:`);
-      console.log(`Asset Title: ${this.state.asset_title}`);
-      console.log(`Asset Author: ${this.state.asset_author}`);
-      console.log(`Asset Date: ${this.state.asset_date}`);
-      console.log(`Asset Keywords: ${this.state.asset_keywords}`);
-      console.log(`Asset Descp: ${this.state.asset_descp}`);
-      console.log(`Asset Version: ${this.state.asset_version}`);
-
       const newAsset = {
-        asset_title: this.state.asset_title,
-        asset_author: this.state.asset_author,
-        asset_date: this.state.asset_date,
-        asset_keywords: this.state.asset_keywords,
-        asset_descp: this.state.asset_descp,
-        isCheckedout: this.state.isCheckedout,
-        asset_version: this.state.asset_version
+        file: {
+          isCheckedout: this.state.isCheckedout,
+
+          newest_version: {
+            asset_title: this.state.asset_title,
+            asset_author: this.state.asset_author,
+            asset_date: this.state.asset_date,
+            asset_keywords: this.state.asset_keywords,
+            asset_descp: this.state.asset_descp,
+            asset_version: this.state.asset_version,
+            edited_at: this.state.edited_at,
+            edited_by: this.state.edited_by
+          },
+
+          all_versions: [
+            {
+              asset_title: this.state.asset_title,
+              asset_author: this.state.asset_author,
+              asset_date: this.state.asset_date,
+              asset_keywords: this.state.asset_keywords,
+              asset_descp: this.state.asset_descp,
+              asset_version: this.state.asset_version,
+              edited_at: this.state.edited_at,
+              edited_by: this.state.edited_by
+            }
+          ]
+        }
       };
 
       axios
-        .post("http://localhost:4000/assets/addText", newAsset)
-        .then(alert("Text file Added Successfully!"));
+        .post("http://localhost:4000/assets/addText", newAsset.file)
+        .then(res => {
+          alert("Text file Added Successfully!");
+          this.state = {
+            isCheckedout: "false",
 
-      this.setState({
-        asset_title: "",
-        asset_author: "",
-        asset_date: "",
-        asset_descp: "",
-        asset_keywords: "",
-        asset_version: 1,
-        isCheckedout: "false"
-      });
+            newest_version: {
+              asset_title: "",
+              asset_author: "",
+              asset_date: "",
+              asset_keywords: "",
+              asset_descp: "",
+              asset_version: "",
+              edited_at: "",
+              edited_by: ""
+            }
+          };
+        });
     } else {
       this.validator.showMessages();
       this.forceUpdate();

@@ -22,15 +22,9 @@ export default class EditPicture extends Component {
     this.displayForm = this.displayForm.bind(this);
 
     this.state = {
-      asset_title: "",
-      asset_author: "",
-      asset_size: "",
-      asset_descp: "",
-      asset_date: "",
-      asset_keywords: "",
-      isCheckout: "",
-      isCheckedoutBy: "",
-      type: ""
+      asset: "",
+      isCheckedout: "",
+      isCheckedoutBy: null
     };
   }
 
@@ -43,14 +37,10 @@ export default class EditPicture extends Component {
     axios
       .put("http://localhost:4000/assets/picture/checkout", checkOutModel)
       .then(response => {
+        console.log(response);
         this.setState({
-          asset_title: response.data.asset_title,
-          asset_author: response.data.asset_author,
-          asset_size: response.data.asset_size,
-          asset_descp: response.data.asset_descp,
-          asset_date: response.data.asset_date,
-          asset_keywords: response.data.asset_keywords,
-          isCheckout: response.data.isCheckout,
+          asset: response.data,
+          isCheckedout: response.data.isCheckedout,
           isCheckedoutBy: response.data.isCheckedoutBy
         });
       })
@@ -60,55 +50,111 @@ export default class EditPicture extends Component {
   }
 
   onChangeAssetTitle(e) {
-    this.setState({
-      asset_title: e.target.value
-    });
+    let asset_title = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_title: asset_title
+        }
+      }
+    }));
   }
 
   onChangeAssetAuthor(e) {
-    this.setState({
-      asset_author: e.target.value
-    });
+    let asset_author = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_author: asset_author
+        }
+      }
+    }));
   }
 
   onChangeAssetSize(e) {
-    this.setState({
-      asset_size: e.target.value
-    });
+    let asset_size = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_size: asset_size
+        }
+      }
+    }));
   }
 
   onChangeAssetDescp(e) {
-    this.setState({
-      asset_descp: e.target.value
-    });
+    let asset_descp = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_descp: asset_descp
+        }
+      }
+    }));
   }
 
   onChangeAssetDate(e) {
-    this.setState({
-      asset_date: e.target.value
-    });
+    let asset_date = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_date: asset_date
+        }
+      }
+    }));
   }
 
   onChangeAssetKeywords(e) {
-    this.setState({
-      asset_keywords: e.target.value
-    });
+    let asset_keywords = e.target.value;
+
+    this.setState(prevState => ({
+      ...prevState,
+      asset: {
+        ...prevState.asset,
+        newest_version: {
+          ...prevState.asset.newest_version,
+          asset_keywords: asset_keywords
+        }
+      }
+    }));
   }
 
   onSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
       const obj = {
+        asset: this.state.asset,
         _id: this.props.match.params.id,
-        asset_title: this.state.asset_title,
-        asset_author: this.state.asset_author,
-        asset_size: this.state.asset_size,
-        asset_descp: this.state.asset_descp,
-        asset_date: this.state.asset_date,
-        asset_keywords: this.state.asset_keywords,
-        isCheckout: false,
+        // asset_title: this.state.asset.newest_version.asset_title,
+        // asset_author: this.state.asset.newest_version.asset_author,
+        // asset_size: this.state.asset.newest_version.asset_size,
+        // asset_descp: this.state.asset.newest_version.asset_descp,
+        // asset_date: this.state.asset.newest_version.asset_date,
+        // asset_keywords: this.state.asset.newest_version.asset_keywords,
+        isCheckedout: false,
         isCheckedoutBy: null
       };
+
       axios
         .post("http://localhost:4000/assets/picture/edit/", obj)
         .then(alert("Picture File Updated Successfully!"))
@@ -121,9 +167,10 @@ export default class EditPicture extends Component {
 
   displayForm() {
     if (
-      this.state.isCheckout &&
+      this.state.isCheckedout &&
       this.state.isCheckedoutBy === this.props.currentUser._id
     ) {
+      console.log(this.state);
       return (
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -131,7 +178,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_title}
+              value={this.state.asset.newest_version.asset_title}
               onChange={this.onChangeAssetTitle}
             />
           </div>
@@ -141,7 +188,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_author}
+              value={this.state.asset.newest_version.asset_author}
               onChange={this.onChangeAssetAuthor}
             />
             {this.validator.message(
@@ -156,7 +203,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_size}
+              value={this.state.asset.newest_version.asset_size}
               onChange={this.onChangeAssetSize}
             />
           </div>
@@ -166,7 +213,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_descp}
+              value={this.state.asset.newest_version.asset_descp}
               onChange={this.onChangeAssetDescp}
             />
           </div>
@@ -176,7 +223,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_date}
+              value={this.state.asset.newest_version.asset_date}
               onChange={this.onChangeAssetDate}
             />
           </div>
@@ -186,7 +233,7 @@ export default class EditPicture extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.state.asset_keywords}
+              value={this.state.asset.newest_version.asset_keywords}
               onChange={this.onChangeAssetKeywords}
             />
             {this.validator.message(

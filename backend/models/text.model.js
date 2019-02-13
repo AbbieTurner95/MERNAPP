@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 
 let Text = new Schema({
-  isCheckout: { type: Boolean, default: false },
+  isCheckedout: { type: Boolean, default: false },
   isCheckedoutBy: { type: ObjectId, default: null },
 
   newest_version: {

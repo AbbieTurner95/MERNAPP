@@ -127,14 +127,14 @@ module.exports = {
         if (err) {
           reject("Picture Checkout : Server Error");
         } else {
-          if (_picture.isCheckout) {
+          if (_picture.isCheckedout) {
             resolve(_picture);
           } else {
             Picture.findOneAndUpdate(
               { _id: _picture._id },
               {
                 $set: {
-                  isCheckout: true,
+                  isCheckedout: true,
                   isCheckedoutBy: body.userId
                 }
               },
@@ -159,14 +159,14 @@ module.exports = {
         if (err) {
           reject("Text Checkout : Server Error");
         } else {
-          if (_text.isCheckout) {
+          if (_text.isCheckedout) {
             resolve(_text);
           } else {
             Text.findOneAndUpdate(
               { _id: _text._id },
               {
                 $set: {
-                  isCheckout: true,
+                  isCheckedout: true,
                   isCheckedoutBy: body.userId
                 }
               },
@@ -191,14 +191,14 @@ module.exports = {
         if (err) {
           reject("Video Checkout : Server Error");
         } else {
-          if (_video.isCheckout) {
+          if (_video.isCheckedout) {
             resolve(_video);
           } else {
             Video.findOneAndUpdate(
               { _id: _video._id },
               {
                 $set: {
-                  isCheckout: true,
+                  isCheckedout: true,
                   isCheckedoutBy: body.userId
                 }
               },

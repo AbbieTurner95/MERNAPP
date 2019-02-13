@@ -12,11 +12,11 @@ import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 const Asset = props => (
   <tr>
-    <td>{props.asset.asset_title}</td>
-    <td>{props.asset.asset_author}</td>
-    <td>{props.asset.asset_descp}</td>
-    <td>{props.asset.asset_date}</td>
-    <td>{props.asset.asset_keywords}</td>
+    <td>{props.asset.newest_version.asset_title}</td>
+    <td>{props.asset.newest_version.asset_author}</td>
+    <td>{props.asset.newest_version.asset_descp}</td>
+    <td>{props.asset.newest_version.asset_date}</td>
+    <td>{props.asset.newest_version.asset_keywords}</td>
 
     <td>
       <Link to={"text/versions/" + props.asset._id}>
