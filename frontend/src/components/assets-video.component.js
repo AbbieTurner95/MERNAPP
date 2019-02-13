@@ -4,11 +4,13 @@ import axios from "axios";
 import "./assets.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
-import { faDesktop } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faEdit,
+  faSearch,
+  faDesktop,
+  faTimesCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 const Asset = props => (
   <tr>

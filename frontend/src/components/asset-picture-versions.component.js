@@ -4,9 +4,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faDesktop } from "@fortawesome/free-solid-svg-icons";
 import { faImages } from "@fortawesome/free-solid-svg-icons";
 
 export default class PictureVersion extends Component {
@@ -14,8 +11,7 @@ export default class PictureVersion extends Component {
     super(props);
 
     this.state = {
-      assets: [],
-      data: ""
+      asset: null
     };
   }
 
@@ -23,8 +19,11 @@ export default class PictureVersion extends Component {
     axios
       .get("http://localhost:4000/assets/picture/" + this.props.match.params.id)
       .then(response => {
-        console.log(response.data);
-        this.setState({ assets: response.data });
+        this.setState({
+          asset: response.data,
+          isCheckedout: response.data.isCheckedout,
+          isCheckedoutBy: response.data.isCheckedoutBy
+        });
       })
       .catch(function(error) {
         console.log(error);
@@ -32,44 +31,50 @@ export default class PictureVersion extends Component {
   }
 
   render() {
-    return (
-      <div className="noMargin">
-        <div className="MarginTop in-line">
-          <FontAwesomeIcon className="Margin Purple" icon={faImages} />
-          <h3>
-            <b>
-              <u>Picture : {this.state.assets.asset_title} </u>
-            </b>
-          </h3>
+    if (this.state.asset != null) {
+      return (
+        <div className="noMargin">
+          <div className="MarginTop in-line">
+            <FontAwesomeIcon className="Margin Purple" icon={faImages} />
+            <h3>
+              <b>
+                <u>Picture : {this.state.asset.newest_version.asset_title} </u>
+              </b>
+            </h3>
+          </div>
+
+          <table className="table table-striped table-hover">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Description</th>
+                <th scope="col">Size</th>
+                <th scope="col">Date</th>
+                <th scope="col">Keywords</th>
+                <th scope="col">Versions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.asset.all_versions.map((asset, index) => {
+                return (
+                  <tr>
+                    <td>{asset.asset_title}</td>
+                    <td>{asset.asset_author}</td>
+                    <td>{asset.asset_descp}</td>
+                    <td>{asset.asset_size}</td>
+                    <td>{asset.asset_date}</td>
+                    <td>{asset.asset_keywords}</td>
+                    <td>{index}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-
-        <table className="table table-striped table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Author</th>
-              <th scope="col">Description</th>
-              <th scope="col">Size</th>
-              <th scope="col">Date</th>
-              <th scope="col">Keywords</th>
-              <th scope="col">Versions</th>
-
-              {this.state.assets.isCheckedout ? (
-                <></>
-              ) : (
-                <th scope="col">Edit</th>
-              )}
-
-              {this.props.currentUser && this.props.currentUser.isAdmin ? (
-                <th scope="col"> Delete</th>
-              ) : (
-                <></>
-              )}
-            </tr>
-          </thead>
-          <tbody />
-        </table>
-      </div>
-    );
+      );
+    } else {
+      return <div>Loading data</div>;
+    }
   }
 }
