@@ -33,8 +33,6 @@ export default class EditText extends Component {
       fileId: this.props.match.params.id
     };
 
-    console.log(checkOutModel);
-
     axios
       .put("http://localhost:4000/assets/text/checkout", checkOutModel)
       .then(response => {
@@ -127,17 +125,11 @@ export default class EditText extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
-      const obj = {
-        asset: this.state.asset,
-        _id: this.props.match.params.id,
-        // asset_title: this.state.asset_title,
-        // asset_author: this.state.asset_author,
-        // asset_descp: this.state.asset_descp,
-        // asset_date: this.state.asset_date,
-        // asset_keywords: this.state.asset_keywords,
-        isCheckedout: false,
-        isCheckedoutBy: null
-      };
+      let obj = this.state.asset;
+      obj.isCheckedout = "false";
+      obj.isCheckedoutBy = null;
+      obj.all_versions.push(obj.newest_version);
+
       axios
         .post("http://localhost:4000/assets/text/edit/", obj)
         .then(alert("Text File Updated Successfully!"))

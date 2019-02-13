@@ -38,7 +38,6 @@ export default class EditVideo extends Component {
     axios
       .put("http://localhost:4000/assets/video/checkout", checkOutModel)
       .then(response => {
-        console.log(response);
         this.setState({
           asset: response.data,
           isCheckedout: response.data.isCheckedout,
@@ -158,19 +157,11 @@ export default class EditVideo extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
-      const obj = {
-        _id: this.props.match.params.id,
-        asset: this.state.asset,
-        // asset_title: this.state.asset_title,
-        // asset_author: this.state.asset_author,
-        // asset_descp: this.state.asset_descp,
-        // asset_size: this.state.asset_size,
-        // asset_length: this.state.asset_length,
-        // asset_date: this.state.asset_date,
-        // asset_keywords: this.state.asset_keywords,
-        isCheckedout: false,
-        isCheckedoutBy: null
-      };
+      let obj = this.state.asset;
+      obj.isCheckedout = "false";
+      obj.isCheckedoutBy = null;
+      obj.all_versions.push(obj.newest_version);
+
       axios
         .post("http://localhost:4000/assets/video/edit/", obj)
         .then(alert("Video File Updated Successfully!"))

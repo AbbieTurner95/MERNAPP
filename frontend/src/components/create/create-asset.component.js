@@ -34,7 +34,7 @@ export default class CreateAsset extends Component {
       <div className="typeForm">
         <h3> Upload new Asset </h3>
 
-        <div class="styled-select black rounded noMargin">
+        <div className="styled-select black rounded noMargin">
           <select onChange={this.changeAssetType}>
             <option value="picture">Picture</option>
             <option value="text">Text</option>

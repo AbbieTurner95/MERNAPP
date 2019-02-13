@@ -37,7 +37,6 @@ export default class EditPicture extends Component {
     axios
       .put("http://localhost:4000/assets/picture/checkout", checkOutModel)
       .then(response => {
-        console.log(response);
         this.setState({
           asset: response.data,
           isCheckedout: response.data.isCheckedout,
@@ -142,18 +141,10 @@ export default class EditPicture extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.validator.allValid()) {
-      const obj = {
-        asset: this.state.asset,
-        _id: this.props.match.params.id,
-        // asset_title: this.state.asset.newest_version.asset_title,
-        // asset_author: this.state.asset.newest_version.asset_author,
-        // asset_size: this.state.asset.newest_version.asset_size,
-        // asset_descp: this.state.asset.newest_version.asset_descp,
-        // asset_date: this.state.asset.newest_version.asset_date,
-        // asset_keywords: this.state.asset.newest_version.asset_keywords,
-        isCheckedout: false,
-        isCheckedoutBy: null
-      };
+      let obj = this.state.asset;
+      obj.isCheckedout = "false";
+      obj.isCheckedoutBy = null;
+      obj.all_versions.push(obj.newest_version);
 
       axios
         .post("http://localhost:4000/assets/picture/edit/", obj)
@@ -170,7 +161,6 @@ export default class EditPicture extends Component {
       this.state.isCheckedout &&
       this.state.isCheckedoutBy === this.props.currentUser._id
     ) {
-      console.log(this.state);
       return (
         <form onSubmit={this.onSubmit}>
           <div className="form-group">

@@ -32,22 +32,7 @@ export default class CreateVideoAsset extends Component {
         asset_version: "",
         edited_at: "",
         edited_by: ""
-      },
-
-      all_versions: [
-        {
-          asset_title: "",
-          asset_author: "",
-          asset_date: "",
-          asset_keywords: "",
-          asset_descp: "",
-          asset_size: "",
-          asset_length: "",
-          asset_version: "",
-          edited_at: "",
-          edited_by: ""
-        }
-      ]
+      }
     };
   }
 
