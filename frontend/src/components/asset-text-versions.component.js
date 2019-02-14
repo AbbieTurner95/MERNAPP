@@ -38,7 +38,9 @@ export default class TextVersion extends Component {
             <FontAwesomeIcon className="Margin Purple" icon={faImages} />
             <h3>
               <b>
-                <u>Text : {this.state.asset.newest_version.asset_title} </u>
+                <u>
+                  Text File : {this.state.asset.newest_version.asset_title}{" "}
+                </u>
               </b>
             </h3>
           </div>

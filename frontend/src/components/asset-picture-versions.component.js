@@ -38,7 +38,9 @@ export default class PictureVersion extends Component {
             <FontAwesomeIcon className="Margin Purple" icon={faImages} />
             <h3>
               <b>
-                <u>Picture : {this.state.asset.newest_version.asset_title} </u>
+                <u>
+                  Picture File : {this.state.asset.newest_version.asset_title}{" "}
+                </u>
               </b>
             </h3>
           </div>

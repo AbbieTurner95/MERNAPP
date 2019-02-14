@@ -38,7 +38,9 @@ export default class VideoVersion extends Component {
             <FontAwesomeIcon className="Margin Purple" icon={faImages} />
             <h3>
               <b>
-                <u>Video : {this.state.asset.newest_version.asset_title} </u>
+                <u>
+                  Video File : {this.state.asset.newest_version.asset_title}{" "}
+                </u>
               </b>
             </h3>
           </div>

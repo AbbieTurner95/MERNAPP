@@ -312,7 +312,7 @@ module.exports = {
 
   searchPictureTitleQuery: async term => {
     return new Promise((resolve, reject) => {
-      Picture.find({ asset_title: term }, (err, pictures) => {
+      Picture.find({ "newest_version.asset_title": term }, (err, pictures) => {
         if (err) {
           reject(err);
         } else {
@@ -324,19 +324,22 @@ module.exports = {
 
   searchPictureKeywordsQuery: async term => {
     return new Promise((resolve, reject) => {
-      Picture.find({ asset_keywords: term }, (err, pictures) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(pictures);
+      Picture.find(
+        { "newest_version.asset_keywords": term },
+        (err, pictures) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(pictures);
+          }
         }
-      });
+      );
     });
   },
 
   searchPictureAuthorQuery: async term => {
     return new Promise((resolve, reject) => {
-      Picture.find({ asset_author: term }, (err, pictures) => {
+      Picture.find({ "newest_version.asset_author": term }, (err, pictures) => {
         if (err) {
           reject(err);
         } else {
@@ -348,7 +351,7 @@ module.exports = {
 
   searchTextTitleQuery: async term => {
     return new Promise((resolve, reject) => {
-      Text.find({ asset_title: term }, (err, texts) => {
+      Text.find({ "newest_version.asset_title": term }, (err, texts) => {
         if (err) {
           reject(err);
         } else {
@@ -360,7 +363,7 @@ module.exports = {
 
   searchTextKeywordsQuery: async term => {
     return new Promise((resolve, reject) => {
-      Text.find({ asset_keywords: term }, (err, texts) => {
+      Text.find({ "newest_version.asset_keywords": term }, (err, texts) => {
         if (err) {
           reject(err);
         } else {
@@ -372,7 +375,7 @@ module.exports = {
 
   searchTextAuthorQuery: async term => {
     return new Promise((resolve, reject) => {
-      Text.find({ asset_author: term }, (err, texts) => {
+      Text.find({ "newest_version.asset_author": term }, (err, texts) => {
         if (err) {
           reject(err);
         } else {
@@ -384,7 +387,7 @@ module.exports = {
 
   searchVideoTitleQuery: async term => {
     return new Promise((resolve, reject) => {
-      Video.find({ asset_title: term }, (err, videos) => {
+      Video.find({ "newest_version.asset_title": term }, (err, videos) => {
         if (err) {
           reject(err);
         } else {
@@ -396,7 +399,7 @@ module.exports = {
 
   searchVideoKeywordsQuery: async term => {
     return new Promise((resolve, reject) => {
-      Video.find({ asset_keywords: term }, (err, videos) => {
+      Video.find({ "newest_version.asset_keywords": term }, (err, videos) => {
         if (err) {
           reject(err);
         } else {
@@ -408,7 +411,7 @@ module.exports = {
 
   searchVideoAuthorQuery: async term => {
     return new Promise((resolve, reject) => {
-      Video.find({ asset_author: term }, (err, videos) => {
+      Video.find({ "newest_version.asset_author": term }, (err, videos) => {
         if (err) {
           reject(err);
         } else {
