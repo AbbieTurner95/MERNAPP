@@ -107,7 +107,7 @@ export default class CreatePictureAsset extends Component {
         .post("http://localhost:4000/assets/addPicture", newAsset.file)
         .then(res => {
           alert("Picture file Added Successfully!");
-          this.state = {
+          this.setState = {
             isCheckedout: "false",
 
             newest_version: {

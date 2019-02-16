@@ -119,7 +119,7 @@ export default class CreateVideoAsset extends Component {
         .post("http://localhost:4000/assets/addVideo", newAsset.file)
         .then(res => {
           alert("Video file Added Successfully!");
-          this.state = {
+          this.setState = {
             isCheckedout: "false",
 
             newest_version: {

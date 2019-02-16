@@ -10,9 +10,6 @@ import { faTextHeight } from "@fortawesome/free-solid-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 
 export default class AssetsList extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="noMargin">

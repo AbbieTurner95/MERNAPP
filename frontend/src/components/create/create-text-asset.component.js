@@ -99,7 +99,7 @@ export default class CreateTextAsset extends Component {
         .post("http://localhost:4000/assets/addText", newAsset.file)
         .then(res => {
           alert("Text file Added Successfully!");
-          this.state = {
+          this.setState = {
             isCheckedout: "false",
 
             newest_version: {
