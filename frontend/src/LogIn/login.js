@@ -8,7 +8,6 @@ import Axios from "axios";
 export default class LogIn extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       email: "",
       password: ""

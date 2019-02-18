@@ -32,6 +32,7 @@ module.exports = {
           reject("Get Pictures: Server Error");
         } else {
           resolve(assets);
+          console.log(assets);
         }
       });
     });
@@ -44,6 +45,7 @@ module.exports = {
           reject("Get Videos : Server Error");
         } else {
           resolve(assets);
+          console.log(assets);
         }
       });
     });
@@ -56,6 +58,7 @@ module.exports = {
           reject("Get Text Files : Server Error");
         } else {
           resolve(assets);
+          console.log(assets);
         }
       });
     });
@@ -435,10 +438,7 @@ module.exports = {
       }
 
       if (!password) {
-        resolve({
-          success: false,
-          message: "Error: Password cannot be blank!"
-        });
+        resolve({ message: "Error: Password cannot be blank!" });
       }
 
       email = email.toLowerCase();
@@ -446,22 +446,15 @@ module.exports = {
 
       User.find({ email: email }, (err, users) => {
         if (err) {
-          reject({
-            success: false,
-            message: err
-          });
+          reject(err);
         }
 
         if (users.length != 1) {
-          resolve({
-            success: false,
-            message: "Error: Invalid user!"
-          });
+          resolve({ message: "Error: Invalid user!" });
         } else {
           const user = users[0];
-          if (!user.password === password) {
+          if (password != user.password) {
             resolve({
-              success: false,
               message: "Error: Invalid password!"
             });
           }
@@ -470,10 +463,7 @@ module.exports = {
           userSession.userId = user._id;
           userSession.save((err, doc) => {
             if (err) {
-              reject({
-                success: false,
-                message: "Error: server error!"
-              });
+              reject("Error: server error!");
             }
             resolve({
               success: true,
