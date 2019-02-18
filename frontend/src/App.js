@@ -80,7 +80,7 @@ class App extends Component {
         <div className="my-nav-bar">
           <nav className="navbar navbar-expand-lg bg-dark">
             <a className="navbar-brand" target="_blank">
-              <img src={logo} width="50" height="50" />
+              <img alt="logo img" src={logo} width="50" height="50" />
             </a>
 
             <h1

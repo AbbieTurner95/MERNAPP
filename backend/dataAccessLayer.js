@@ -445,7 +445,6 @@ module.exports = {
       email = email.trim();
 
       User.find({ email: email }, (err, users) => {
-        console.log(users);
         if (err) {
           reject({
             success: false,
